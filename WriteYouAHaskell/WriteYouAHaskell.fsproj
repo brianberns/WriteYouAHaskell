@@ -10,6 +10,7 @@
     <Compile Include="Syntax.fs" />
     <Compile Include="Type.fs" />
     <Compile Include="Subst.fs" />
+    <Compile Include="Infer.fs" />
   </ItemGroup>
 
 </Project>
