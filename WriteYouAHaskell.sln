@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WriteYouAHaskell", "WriteYouAHaskell\WriteYouAHaskell.fsproj", "{A602897C-7FA7-489F-BE14-843A87566656}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UnitTests", "UnitTests\UnitTests.fsproj", "{C7C0C675-7679-45F3-B8C3-707CE03C1587}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A602897C-7FA7-489F-BE14-843A87566656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A602897C-7FA7-489F-BE14-843A87566656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A602897C-7FA7-489F-BE14-843A87566656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C0C675-7679-45F3-B8C3-707CE03C1587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C0C675-7679-45F3-B8C3-707CE03C1587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C0C675-7679-45F3-B8C3-707CE03C1587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C0C675-7679-45F3-B8C3-707CE03C1587}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
