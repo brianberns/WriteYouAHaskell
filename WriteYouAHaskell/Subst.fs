@@ -35,7 +35,7 @@ module Subst =
         Map.map' (Type.apply s1) s2
             |> Map.union s1
 
-    let (++) s1 s2 = compose s1 s2
+    let (++) = compose
 
     let rec unify t1 t2 =
 
