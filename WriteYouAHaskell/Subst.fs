@@ -35,6 +35,35 @@ module Subst =
         Map.map' (Type.apply s1) s2
             |> Map.union s1
 
+    let (++) = compose
+
+    let rec unify t1 t2 =
+
+        let occursCheck a t =
+            Set.contains a (Type.ftv t)
+
+        let bind a t =
+            if t = TVar a then
+                Ok empty
+            elif occursCheck a t then
+                Error $"Infinite type {a} {t}"
+            else
+                Ok (Map [a, t])
+
+        match t1, t2 with
+            | TArr (l, r), TArr (l', r') ->
+                result {
+                    let! s1 = unify l l'
+                    let! s2 = unify (Type.apply s1 r) (Type.apply s1 r')
+                    return s1 ++ s2
+                }
+            | TVar a, t
+            | t, TVar a ->
+                bind a t
+            | (TCon a), (TCon b) when a = b ->
+                Ok empty
+            | _ -> Error $"Unification fail {t1} {t2}"
+
     module Scheme =
 
         let apply (s : Subst) (Forall (vs, t)) =

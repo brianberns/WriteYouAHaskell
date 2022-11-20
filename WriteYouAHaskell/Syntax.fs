@@ -9,7 +9,7 @@ type Lit =
 type Binop =
     | Add | Sub | Mul | Eql
 
-type Var = V of Name
+type Var = string
 
 type Expr =
     | Var of Var
@@ -21,6 +21,9 @@ type Expr =
     | Fix of Expr
     | Op of Binop * Expr * Expr
 
+(*
+let add x y = x + y; => let add = \x -> \y -> x + y;
+*)
 type Decl = string * Expr
 
 type Program = Program of List<Decl> * Expr
