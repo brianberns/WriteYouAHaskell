@@ -18,5 +18,5 @@ type TypeEnv = TypeEnv of Map<Var, Scheme>
 
 module TypeEnv =
 
-    let extent x s (TypeEnv env) =
+    let extend x s (TypeEnv env) =
         TypeEnv (Map.add x s env)

@@ -6,8 +6,14 @@ module Subst =
 
     let empty : Subst = Map.empty
 
-    let compose s1 s2 =
-        ()
+    module private Map =
+
+        let map' f =
+            Map.map (fun _ v -> f v)
+
+        let union m1 m2 =
+            Seq.append (Map.toSeq m2) (Map.toSeq m1)   // left-biased
+                |> Map.ofSeq
 
     module Type =
 
@@ -25,6 +31,10 @@ module Subst =
             | TVar a -> set [a]
             | TArr (t1, t2) -> ftv t1 + ftv t2
 
+    let compose (s1 : Subst) (s2 : Subst) : Subst =
+        Map.map' (Type.apply s1) s2
+            |> Map.union s1
+
     module Scheme =
 
         let apply (s : Subst) (Forall (vs, t)) =
@@ -37,9 +47,7 @@ module Subst =
     module TypeEnv =
 
         let apply s (TypeEnv env) =
-            let mapWithoutKey f =
-                Map.map (fun _ v -> f v)
-            TypeEnv (mapWithoutKey (Scheme.apply s) env)
+            TypeEnv (Map.map' (Scheme.apply s) env)
 
         let ftv (TypeEnv env) =
             Seq.collect Scheme.ftv (Map.values env)
