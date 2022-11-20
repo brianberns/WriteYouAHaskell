@@ -9,8 +9,7 @@
     <None Include="Readme.md" />
     <Compile Include="Syntax.fs" />
     <Compile Include="Type.fs" />
+    <Compile Include="Subst.fs" />
   </ItemGroup>
-
-  <ItemGroup />
 
 </Project>
