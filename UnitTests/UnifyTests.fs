@@ -9,12 +9,24 @@ type UnifyTests() =
     let y = TV "Y"
 
     [<TestMethod>]
-    member this.UnifySuccess() =
+    member this.UnifySuccess1() =
         let t1 = TArr (TVar x, Type.int)    // X -> Int
         let t2 = TArr (Type.bool, TVar y)   // Y -> Int
         let expected =
             Ok (Map [
                 x, Type.bool
+                y, Type.int
+            ] : Subst)
+        let actual = Subst.unify t1 t2
+        Assert.AreEqual<_>(expected, actual)
+
+    [<TestMethod>]
+    member this.UnifySuccess2() =
+        let t1 = TArr (TVar x, TVar x)     // X -> X
+        let t2 = TArr (Type.int, TVar y)   // Int -> Y
+        let expected =
+            Ok (Map [
+                x, Type.int
                 y, Type.int
             ] : Subst)
         let actual = Subst.unify t1 t2
