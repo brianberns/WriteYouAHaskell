@@ -2,6 +2,11 @@
 
 type Subst = Map<TVar, Type>
 
+type TypeError =
+    | UnificationFail of Type * Type
+    | InfiniteType of TVar * Type
+    // | UnboundVariable of string
+
 module Subst =
 
     let empty : Subst = Map.empty
@@ -46,7 +51,7 @@ module Subst =
             if t = TVar a then
                 Ok empty
             elif occursCheck a t then
-                Error $"Infinite type {a} {t}"
+                Error (InfiniteType (a, t))
             else
                 Ok (Map [a, t])
 
@@ -62,7 +67,7 @@ module Subst =
                 bind a t
             | (TCon a), (TCon b) when a = b ->
                 Ok empty
-            | _ -> Error $"Unification fail {t1} {t2}"
+            | _ -> Error (UnificationFail (t1, t2))
 
     module Scheme =
 
