@@ -1,0 +1,1 @@
+﻿[Write You a Haskell](https://web.archive.org/web/20211218201109/http://dev.stephendiehl.com/fun/WYAH.pdf)
