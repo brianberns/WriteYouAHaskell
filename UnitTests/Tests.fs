@@ -36,3 +36,11 @@ type TestClass () =
             Error (UnificationFail (Type.int, Type.bool))
         let actual = Subst.unify t1 t2
         Assert.AreEqual<_>(expected, actual)
+
+    [<TestMethod>]
+    member this.InfiniteType() =
+        let t1 = TVar x                  // X
+        let t2 = TArr (TVar x, TVar y)   // X -> Y
+        let expected = Error (InfiniteType (x, t2))
+        let actual = Subst.unify t1 t2
+        Assert.AreEqual<_>(expected, actual)
