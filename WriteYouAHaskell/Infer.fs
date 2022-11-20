@@ -6,18 +6,18 @@ module Infer =
         Seq.allPairs xs ys
             |> Seq.map (fun (x, y) -> f x y)
 
-    let replicateM cnt0 f =
+    let replicateM n xs =
 
-        let rec loop cnt =
-            if cnt <= 0 then
+        let rec loop n =
+            if n <= 0 then
                 Seq.singleton []
             else
                 liftA2
                     (fun x xs -> x :: xs)
-                    f
-                    (loop (cnt - 1))
+                    xs
+                    (loop (n - 1))
 
-        loop cnt0
+        loop n
 
     let letters =
         Seq.initInfinite (fun i ->
