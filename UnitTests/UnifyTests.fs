@@ -10,7 +10,7 @@ type UnifyTests() =
     let y = TV "Y"
 
     [<TestMethod>]
-    member this.UnifySuccess1() =
+    member this.UnifySucceed1() =
         let t1 = TVar x => Type.int
         let t2 = Type.bool => TVar y
         let expected =
@@ -22,7 +22,7 @@ type UnifyTests() =
         Assert.AreEqual(expected, actual)
 
     [<TestMethod>]
-    member this.UnifySuccess2() =
+    member this.UnifySucceed2() =
         let t1 = TVar x => TVar x
         let t2 = Type.int => TVar y
         let expected =

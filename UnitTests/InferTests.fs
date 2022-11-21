@@ -7,7 +7,7 @@ open WriteYou
 type InferTests() =
 
     [<TestMethod>]
-    member this.Infer() =
+    member this.InferSucceed() =
         let expr =
             Let (
                 "x",
@@ -19,4 +19,14 @@ type InferTests() =
         let actual =
             Infer.infer TypeEnv.empty expr
                 |> Result.map snd
+        Assert.AreEqual(expected, actual)
+
+    [<TestMethod>]
+    member this.InferFail() =
+        let expr =
+            Op (Mul, Lit (LBool false), Lit (LInt 1))
+        let expected =
+            Error (UnificationFail (Type.bool, Type.int))
+        let actual =
+            Infer.infer TypeEnv.empty expr
         Assert.AreEqual(expected, actual)
