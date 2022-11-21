@@ -88,3 +88,21 @@ module Infer =
                 | Lit (LBool _) ->
                     return Subst.empty, Type.bool
         }
+
+    let private closeOver sub ty =
+        generalize TypeEnv.empty (Type.apply sub ty)
+
+    let private inferExpr env ex =
+        result {
+            let! sub, ty = infer env ex
+            return closeOver sub ty
+        }
+
+    let rec inferTop env = function
+        | [] -> Ok env
+        | ((name, ex) : Decl) :: xs ->
+            result {
+                let! sc = inferExpr env ex
+                let env' = TypeEnv.extend name sc env
+                return! inferTop env' xs
+            }
