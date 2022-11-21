@@ -1,6 +1,7 @@
 namespace WriteYou
 
 open Microsoft.VisualStudio.TestTools.UnitTesting
+open WriteYou
 
 [<TestClass>]
 type UnifyTests() =
@@ -18,7 +19,7 @@ type UnifyTests() =
                 y, Type.int
             ] : Subst)
         let actual = Subst.unify t1 t2
-        Assert.AreEqual<_>(expected, actual)
+        Assert.AreEqual(expected, actual)
 
     [<TestMethod>]
     member this.UnifySuccess2() =
@@ -30,7 +31,7 @@ type UnifyTests() =
                 y, Type.int
             ] : Subst)
         let actual = Subst.unify t1 t2
-        Assert.AreEqual<_>(expected, actual)
+        Assert.AreEqual(expected, actual)
 
     [<TestMethod>]
     member this.UnifyFail() =
@@ -39,7 +40,7 @@ type UnifyTests() =
         let expected =
             Error (UnificationFail (Type.int, Type.bool))
         let actual = Subst.unify t1 t2
-        Assert.AreEqual<_>(expected, actual)
+        Assert.AreEqual(expected, actual)
 
     [<TestMethod>]
     member this.InfiniteType() =
@@ -47,4 +48,4 @@ type UnifyTests() =
         let t2 = TVar x => TVar y
         let expected = Error (InfiniteType (x, t2))
         let actual = Subst.unify t1 t2
-        Assert.AreEqual<_>(expected, actual)
+        Assert.AreEqual(expected, actual)
