@@ -5,7 +5,7 @@ type Subst = Map<TVar, Type>
 type TypeError =
     | UnificationFail of Type * Type
     | InfiniteType of TVar * Type
-    // | UnboundVariable of string
+    | UnboundVariable of string
 
 module Subst =
 
