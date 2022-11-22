@@ -7,6 +7,11 @@ type TypeError =
     | InfiniteType of TVar * Type
     | UnboundVariable of string
 
+[<AutoOpen>]
+module Arrow =
+
+    let (=>) t1 t2 = TArr (t1, t2)
+
 module Subst =
 
     let empty : Subst = Map.empty
@@ -29,7 +34,7 @@ module Subst =
                     |> Map.tryFind a
                     |> Option.defaultValue t
             | TArr (t1, t2) ->
-                TArr (apply s t1, apply s t2)
+                apply s t1 => apply s t2
 
         let rec ftv = function
             | TCon _ -> Set.empty

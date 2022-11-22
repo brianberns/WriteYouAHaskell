@@ -1,10 +1,5 @@
 ﻿namespace WriteYou
 
-[<AutoOpen>]
-module Operator =
-
-    let (=>) t1 t2 = TArr (t1, t2)
-
 module Infer =
 
     open Subst
