@@ -59,7 +59,8 @@ module Subst =
             | TArr (l, r), TArr (l', r') ->
                 result {
                     let! s1 = unify l l'
-                    let! s2 = unify (Type.apply s1 r) (Type.apply s1 r')
+                    let! s2 =
+                        unify (Type.apply s1 r) (Type.apply s1 r')
                     return s1 ++ s2
                 }
             | TVar a, t
